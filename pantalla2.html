@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4a261">
+  <title>Pio's Pizza | Snacks, bebidas y postres</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="menu-screen" data-screen="two">
+  <header class="tv-header">
+    <a class="brand-lockup" href="index.html" aria-label="Volver a elegir pantalla">
+      <span class="brand-mark" aria-hidden="true">P</span><span>Pio's <strong>Pizza</strong></span>
+    </a>
+    <div class="tv-heading"><span class="eyebrow">PARA CADA ANTOJO</span><h1>Algo rico para <em>acompañar.</em></h1></div>
+    <div class="screen-badge"><span class="live-dot"></span> PANTALLA 02</div>
+  </header>
+  <main class="tv-main tv-main-two" data-carousel="screen-two">
+    <section class="menu-panel compact-panel snacks-panel" aria-labelledby="snacks-title">
+      <div class="section-heading"><div><span class="section-kicker">PARA PICAR</span><h2 id="snacks-title">Snacks</h2></div><span class="section-index">01</span></div>
+      <div id="snacks-list" class="item-grid" aria-label="Snacks y sabores"></div>
+    </section>
+    <section class="menu-panel compact-panel cold-panel" aria-labelledby="cold-title">
+      <div class="section-heading"><div><span class="section-kicker">BIEN FRÍAS</span><h2 id="cold-title">Bebidas frías</h2></div><span class="section-index">02</span></div>
+      <div id="cold-list" class="item-grid" aria-label="Bebidas frías y sabores"></div>
+    </section>
+    <section class="menu-panel compact-panel hot-panel" aria-labelledby="hot-title">
+      <div class="section-heading"><div><span class="section-kicker">RECONFORTANTES</span><h2 id="hot-title">Bebidas calientes</h2></div><span class="section-index">03</span></div>
+      <div id="hot-list" class="item-grid" aria-label="Bebidas calientes"></div>
+    </section>
+    <section class="menu-panel compact-panel dessert-panel" aria-labelledby="desserts-title">
+      <div class="section-heading"><div><span class="section-kicker">UN DULCE FINAL</span><h2 id="desserts-title">Postres</h2></div><span class="section-index">04</span></div>
+      <div id="dessert-list" class="item-grid dessert-grid" aria-label="Crepas, waffles y pay de queso"></div>
+    </section>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>

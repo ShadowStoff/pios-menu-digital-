@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4a261">
+  <title>Pio's Pizza | Pizzas y hamburguesas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="menu-screen" data-screen="one">
+  <header class="tv-header">
+    <a class="brand-lockup" href="index.html" aria-label="Volver a elegir pantalla">
+      <span class="brand-mark" aria-hidden="true">P</span><span>Pio's <strong>Pizza</strong></span>
+    </a>
+    <div class="tv-heading"><span class="eyebrow">MENÚ PRINCIPAL</span><h1>Recién hechas, <em>siempre.</em></h1></div>
+    <div class="screen-badge"><span class="live-dot"></span> PANTALLA 01</div>
+  </header>
+  <main class="tv-main tv-main-one" data-carousel="screen-one">
+    <section class="menu-panel pizza-panel" aria-labelledby="pizzas-title">
+      <div class="section-heading">
+        <div><span class="section-kicker">AL HORNO · PARA COMPARTIR</span><h2 id="pizzas-title">Pizzas</h2></div>
+        <span class="section-index">01 / 02</span>
+      </div>
+      <div id="pizza-grid" class="pizza-grid" aria-label="Especialidades de pizza"></div>
+      <div id="pizza-sizes" class="pizza-sizes" aria-label="Tamaños, rebanadas y precios"></div>
+    </section>
+    <section class="menu-panel burger-panel" aria-labelledby="burgers-title">
+      <div class="section-heading burger-heading">
+        <div><span class="section-kicker">CLÁSICAS DE LA CASA</span><h2 id="burgers-title">Hamburguesas</h2></div>
+        <span class="section-index">02 / 02</span>
+      </div>
+      <div id="burger-groups" class="burger-groups" aria-label="Combos y hamburguesas solas"></div>
+      <div class="burger-note"><span class="note-star" aria-hidden="true">✳</span> Combos con hamburguesa, papas y refresco</div>
+    </section>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>
