@@ -4,6 +4,7 @@ const pizzaSizes = [
   { name: "Grande", slices: 10, price: 180 },
   { name: "Familiar", slices: 12, price: 200 }
 ];
+const PIZZAS_PER_PAGE = 6;
 
 const snackFlavors = ["BBQ", "Mango Habanero", "Buffalo", "Tamarindo"];
 const frappeFlavors = ["Moka", "Vainilla", "Capuchino", "Oreo"];
@@ -11,7 +12,7 @@ const milkshakeFlavors = ["Fresa", "Vainilla", "Chocolate", "Rompope"];
 const dessertIngredients = ["Nutella", "Quesocrema", "Lechera", "Cajeta", "Mermelada de Fresa", "Mermelada de Zarzamora", "Fresas", "Zarzamora", "Moras", "Nuez", "Canela"];
 
 const pizzaSpecialties = [
-  { id: "pepperoni", name: "Pepperoni", description: "Pepperoni, salsa de tomate y mozzarella.", image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80" },
+  { id: "pepperoni", name: "Pepperoni", description: "", image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80" },
   { id: "hawaiana", name: "Hawaiana", description: "Jamón de pavo y piña.", image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=800&q=80" },
   { id: "carnes-frias", name: "Carnes Frías", description: "Tocino, pepperoni en rajas y jamón.", image: "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80" },
   { id: "americana", name: "Americana", description: "Salchicha, pepperoni y jamón.", image: "https://images.unsplash.com/photo-1601924582970-9238bcb495d9?auto=format&fit=crop&w=800&q=80" },
@@ -20,11 +21,13 @@ const pizzaSpecialties = [
   { id: "mexicana", name: "Mexicana", description: "Arrachera marinada, cebollas y jalapeño.", image: "https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=80" },
   { id: "pollo-bbq", name: "Pollo a la BBQ", description: "Cebollas y pollo BBQ.", image: "https://images.unsplash.com/photo-1601924582970-9238bcb495d9?auto=format&fit=crop&w=800&q=80" },
   { id: "alambre", name: "Alambre", description: "Chile poblano, tocino, chorizo y cebollas.", image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=80" },
-  { id: "vegetariana", name: "Vegetariana", description: "Champiñones, tomates, chile poblano y cebollas.", image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=800&q=80" }
+  { id: "vegetariana", name: "Vegetariana", description: "Champiñones, tomates, chile poblano y cebollas.", image: "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=800&q=80" },
+  { id: "pepperoni-champinones", name: "Pepperoni con Champiñones", description: "", image: "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=1000&q=85" },
+  { id: "chicken-fajita", name: "Chicken Fajita", description: "Fajitas de pollo jugosas, chile morrón, chile poblano y cebollas.", image: "https://images.unsplash.com/photo-1689773976415-293dd893f77e?auto=format&fit=crop&w=1000&q=85" }
 ];
 
 const products = [
-  ...pizzaSpecialties.map((specialty) => ({ ...specialty, category: "Pizzas" })),
+  ...pizzaSpecialties.map(({ id, name, description, image }) => ({ id, nombre: name, categoria: "Pizzas", descripcion: description, imagen: image })),
   { id: "combo-sencillo", name: "Combo Sencillo", category: "Hamburguesas", group: "Combos de Hamburguesa", price: 100, description: "Contiene hamburguesa, papas y refresco", image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80" },
   { id: "combo-tocino", name: "Combo con Tocino", category: "Hamburguesas", group: "Combos de Hamburguesa", price: 110, description: "Contiene hamburguesa, papas y refresco", image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80" },
   { id: "combo-hawaiano", name: "Combo Hawaiano", category: "Hamburguesas", group: "Combos de Hamburguesa", price: 110, description: "Contiene hamburguesa, papas y refresco", image: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=800&q=80" },
@@ -66,36 +69,42 @@ const money = (amount) => `$${amount} MXN`;
 const imageMarkup = (product, className = "") => `<img class="${className}" src="${product.image}" alt="${product.name}" loading="lazy">`;
 
 function renderPizzaScreen() {
-  const pizzaGrid = document.querySelector("#pizza-grid");
-  const burgerGroups = document.querySelector("#burger-groups");
-  const pizzaSizesElement = document.querySelector("#pizza-sizes");
-  const pizzas = products.filter((product) => product.category === "Pizzas");
-  const burgers = products.filter((product) => product.category === "Hamburguesas");
-
-  pizzaGrid.innerHTML = pizzas.map((pizza) => `
-    <article class="pizza-card">
-      ${imageMarkup(pizza)}
-      <div><h3>${pizza.name}</h3><p>${pizza.description}</p></div>
-    </article>
-  `).join("");
-
-  pizzaSizesElement.innerHTML = pizzaSizes.map((size) => `
+  const pizzaGrids = [
+    document.querySelector("#pizza-grid-page-one"),
+    document.querySelector("#pizza-grid-page-two")
+  ];
+  const burgerLists = [
+    [document.querySelector("#combo-list"), "Combos de Hamburguesa"],
+    [document.querySelector("#solo-burger-list"), "Hamburguesas Solas"]
+  ];
+  const pizzaSizesMarkup = pizzaSizes.map((size) => `
     <div class="size-price"><strong>${size.name}</strong><b>${money(size.price)}</b><span>${size.slices} rebanadas</span></div>
   `).join("");
+  const pizzas = products.filter((product) => product.categoria === "Pizzas");
+  const burgers = products.filter((product) => product.category === "Hamburguesas");
+  const renderPizzaCard = (pizza) => `
+    <article class="pizza-card">
+      ${imageMarkup({ name: pizza.nombre, image: pizza.imagen })}
+      <div class="pizza-card-copy"><h3>${pizza.nombre}</h3><p>${pizza.descripcion}</p></div>
+    </article>
+  `;
 
-  const groups = [...new Set(burgers.map((burger) => burger.group))];
-  burgerGroups.innerHTML = groups.map((group) => `
-    <section class="burger-group" aria-label="${group}">
-      <h3 class="burger-group-title">${group}</h3>
-      ${burgers.filter((burger) => burger.group === group).map((burger) => `
-        <article class="burger-item">
-          ${imageMarkup(burger)}
-          <div><h3>${burger.name}</h3><p>${burger.description}</p></div>
-          <b>${money(burger.price)}</b>
-        </article>
-      `).join("")}
-    </section>
-  `).join("");
+  pizzaGrids.forEach((grid, pageIndex) => {
+    grid.innerHTML = pizzas.slice(pageIndex * PIZZAS_PER_PAGE, (pageIndex + 1) * PIZZAS_PER_PAGE).map(renderPizzaCard).join("");
+  });
+
+  document.querySelector("#pizza-sizes-page-one").innerHTML = pizzaSizesMarkup;
+  document.querySelector("#pizza-sizes-page-two").innerHTML = pizzaSizesMarkup;
+
+  burgerLists.forEach(([list, group]) => {
+    list.innerHTML = burgers.filter((burger) => burger.group === group).map((burger) => `
+      <article class="burger-item">
+        ${imageMarkup(burger)}
+        <div><h3>${burger.name}</h3><p>${burger.description}</p></div>
+        <b>${money(burger.price)}</b>
+      </article>
+    `).join("");
+  });
 }
 
 function renderMenuItem(product) {
@@ -147,7 +156,7 @@ function initializeCarousel() {
   window.setInterval(() => {
     activeIndex = (activeIndex + 1) % slides.length;
     showActiveSlide();
-  }, 8000);
+  }, Number(main.dataset.carouselInterval) || 8000);
 }
 
 if (document.body.dataset.screen === "one") renderPizzaScreen();

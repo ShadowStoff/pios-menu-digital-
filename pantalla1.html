@@ -10,7 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="menu-screen" data-screen="one">
+<body class="menu-screen tv-frame" data-screen="one">
   <header class="tv-header">
     <a class="brand-lockup" href="index.html" aria-label="Volver a elegir pantalla">
       <span class="brand-mark" aria-hidden="true">P</span><span>Pio's <strong>Pizza</strong></span>
@@ -18,22 +18,36 @@
     <div class="tv-heading"><span class="eyebrow">MENÚ PRINCIPAL</span><h1>Recién hechas, <em>siempre.</em></h1></div>
     <div class="screen-badge"><span class="live-dot"></span> PANTALLA 01</div>
   </header>
-  <main class="tv-main tv-main-one" data-carousel="screen-one">
-    <section class="menu-panel pizza-panel" aria-labelledby="pizzas-title">
+  <main class="tv-main tv-main-one" data-carousel="screen-one" data-carousel-interval="10000">
+    <section class="menu-panel pizza-panel pizza-page pizza-page-one" aria-labelledby="pizzas-title">
       <div class="section-heading">
         <div><span class="section-kicker">AL HORNO · PARA COMPARTIR</span><h2 id="pizzas-title">Pizzas</h2></div>
         <span class="section-index">01 / 02</span>
       </div>
-      <div id="pizza-grid" class="pizza-grid" aria-label="Especialidades de pizza"></div>
-      <div id="pizza-sizes" class="pizza-sizes" aria-label="Tamaños, rebanadas y precios"></div>
+      <div id="pizza-grid-page-one" class="pizza-grid" aria-label="Página 1 de 2: seis especialidades de pizza, con fotos, nombres y descripciones"></div>
+      <div id="pizza-sizes-page-one" class="pizza-sizes" aria-label="Tamaños, rebanadas y precios"></div>
     </section>
-    <section class="menu-panel burger-panel" aria-labelledby="burgers-title">
-      <div class="section-heading burger-heading">
-        <div><span class="section-kicker">CLÁSICAS DE LA CASA</span><h2 id="burgers-title">Hamburguesas</h2></div>
+    <section class="menu-panel pizza-panel pizza-page pizza-page-two" aria-labelledby="pizzas-page-two-title">
+      <div class="section-heading">
+        <div><span class="section-kicker">MÁS FAVORITAS · PARA COMPARTIR</span><h2 id="pizzas-page-two-title">Pizzas</h2></div>
         <span class="section-index">02 / 02</span>
       </div>
-      <div id="burger-groups" class="burger-groups" aria-label="Combos y hamburguesas solas"></div>
-      <div class="burger-note"><span class="note-star" aria-hidden="true">✳</span> Combos con hamburguesa, papas y refresco</div>
+      <div id="pizza-grid-page-two" class="pizza-grid" aria-label="Página 2 de 2: seis especialidades de pizza, con fotos, nombres y descripciones"></div>
+      <div id="pizza-sizes-page-two" class="pizza-sizes" aria-label="Tamaños, rebanadas y precios"></div>
+    </section>
+    <section class="menu-panel burger-panel burger-combos-page" aria-labelledby="burger-combos-title">
+      <div class="section-heading burger-heading">
+        <div><span class="section-kicker">CLÁSICAS DE LA CASA · CON PAPAS Y REFRESCO</span><h2 id="burger-combos-title">Combos de Hamburguesa</h2></div>
+        <span class="section-index">03 / 04</span>
+      </div>
+      <div id="combo-list" class="burger-grid" aria-label="Combos de hamburguesa"></div>
+    </section>
+    <section class="menu-panel burger-panel burger-solos-page" aria-labelledby="burgers-title">
+      <div class="section-heading burger-heading">
+        <div><span class="section-kicker">CLÁSICAS DE LA CASA · HAMBURGUESAS SOLAS</span><h2 id="burgers-title">Hamburguesas</h2></div>
+        <span class="section-index">04 / 04</span>
+      </div>
+      <div id="solo-burger-list" class="burger-grid" aria-label="Hamburguesas solas"></div>
     </section>
   </main>
   <script src="app.js" defer></script>
